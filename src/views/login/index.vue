@@ -84,8 +84,8 @@ export default {
     };
     return {
       loginForm: {
-        username: "tbtb",
-        password: "123456"
+        username: "123456",
+        password: "1233"
       },
       loginRules: {
         username: [
@@ -122,11 +122,11 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$message({
-            message: "#24木得接口#24",
-            type: "warning"
-          });
-          return;
+          // this.$message({
+          //   message: "#24木得接口#24",
+          //   type: "warning"
+          // });
+          // return;
           this.loading = true;
           this.$store
             .dispatch("user/login", this.loginForm)
