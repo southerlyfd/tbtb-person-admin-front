@@ -9,7 +9,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">TBTB 人事管理后台</h3>
+        <h3 class="title">企业人事系统-JAVA</h3>
       </div>
 
       <el-form-item prop="username">
@@ -85,7 +85,7 @@ export default {
     return {
       loginForm: {
         username: "123456",
-        password: "1233"
+        password: "123"
       },
       loginRules: {
         username: [

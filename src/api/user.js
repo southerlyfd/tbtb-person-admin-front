@@ -8,10 +8,11 @@ export function login(data) {
   });
 }
 
-export function getInfo() {
+export function getInfo(params) {
   return request({
     url: "oa/userInfo/findPersonInfoByToken",
-    method: "post"
+    method: "post",
+    params
   });
 }
 

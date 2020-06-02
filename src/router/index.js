@@ -55,6 +55,19 @@ export const constantRoutes = [
     }]
   },
 
+  {
+    path: '/userManage',
+    component: Layout,
+    redirect: '/userManage/list',
+    alwaysShow: true,
+    meta: { title: '用户管理', icon: 'example' },
+    children: [{
+      path: 'infoManage/list',
+      name: 'infoManageList',
+      component: () => import('@/views/userManage/infoManage/list'),
+      meta: { title: '人员资料管理', icon: 'tree' }
+    }]
+  },
   // {
   //   path: '/example',
   //   component: Layout,
