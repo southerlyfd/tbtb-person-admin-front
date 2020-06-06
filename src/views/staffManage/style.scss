@@ -1,0 +1,25 @@
+// 职员编辑
+.staff-edit {
+  .staff-form {
+    width:1000px;
+    .main-form {
+      display: flex;
+      .left {
+        .item {
+          display: flex;
+          .normal-input {
+            width: 150px;
+          }
+        }
+      }
+      .right {
+        width: 300px;
+        height: 300px;
+        margin-left:5px;
+      }
+    }
+    .form-item {
+      display: flex;
+    }
+  }
+}

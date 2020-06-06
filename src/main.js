@@ -15,6 +15,18 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import rtyElTable from 'rty-el-table'
+import filterHead from '@/components/filterHead'
+
+Vue.component('rty-el-table', rtyElTable)
+Vue.component('filter-head', filterHead)
+
+import { formatSearchSelect, formatSearchInput } from '@/utils/validate'
+Vue.prototype.formatSearchSelect = formatSearchSelect
+Vue.prototype.formatSearchInput = formatSearchInput
+
+require('./filters');
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
