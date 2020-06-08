@@ -1,7 +1,18 @@
+.staff {
+  .info {
+    display: flex;
+    align-items: center;
+    img {
+      width: 50px;
+      height: 50px;
+      margin-right:3px
+    }
+  }
+}
 // 职员编辑
 .staff-edit {
   .staff-form {
-    width:1000px;
+    width: 1000px;
     .main-form {
       display: flex;
       .left {
@@ -15,7 +26,7 @@
       .right {
         width: 300px;
         height: 300px;
-        margin-left:5px;
+        margin-left: 5px;
       }
     }
     .form-item {

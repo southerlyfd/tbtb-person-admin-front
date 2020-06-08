@@ -10,7 +10,7 @@
         type="primary"
         size="small"
         icon="el-icon-plus"
-        >新增职员</el-button
+        >新增考勤信息</el-button
       >
     </div>
     <rty-el-table
@@ -18,23 +18,15 @@
       :tableData="tableList"
       :tableProps="tableProps"
     >
-      <template slot="name" slot-scope="scope">
-        <div class="info">
-          <div class="img">
-            <img class="full-img" :src="scope.row.photo" alt="" />
-          </div>
-          <span>{{ scope.row.name }}</span>
-        </div>
-      </template>
       <template slot="date" slot-scope="scope">
         <span>{{ scope.row.date | formatBirthday }}</span>
       </template>
       <el-table-column slot="handle" align="center" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button type="text" @click="editStaff(scope.row.employeeID)"
+          <!-- <el-button type="text" @click="editStaff(scope.row.attendId)"
             >编辑</el-button
-          >
-          <el-button type="text" @click="deleteStaff(scope.row.employeeID)"
+          > -->
+          <el-button type="text" @click="deleteStaff(scope.row.attendId)"
             >删除</el-button
           >
         </template>
@@ -45,9 +37,9 @@
         background
         @size-change="changeSize"
         @current-change="changePage"
-        :current-page.sync="staffListParams.currentPage"
+        :current-page.sync="checkListParams.currentPage"
         :page-sizes="[5, 10, 15, 20]"
-        :page-size="staffListParams.onePageCount"
+        :page-size="checkListParams.onePageCount"
         layout="total, sizes, prev, pager, next"
         :total="totalNum"
       ></el-pagination>
@@ -56,22 +48,22 @@
 </template>
 
 <script>
-import staffApi from "@/api/staff";
-import staffParams from "../staffParams";
+import checkApi from "@/api/check";
+import checkParams from "../checkParams";
 export default {
   data() {
     return {
       loadTable: false,
       totalNum: 0,
       //查询参数
-      staffListParams: {
+      checkListParams: {
         currentPage: 1,
         onePageCount: 10
       },
       filterList: [], //筛选列表
       filterParams: {}, //筛选参数
       tableList: [], //职员列表
-      tableProps: staffParams.tableProps //职员列表参数
+      tableProps: checkParams.tableProps //职员列表参数
     };
   },
   created() {
@@ -79,14 +71,14 @@ export default {
     this.filterList.push(this.formatSearchInput("职员姓名", "name"));
   },
   mounted() {
-    this.findPersonInfoLst();
+    this.findAttendInfoLst();
   },
   methods: {
     // 职员列表
-    async findPersonInfoLst() {
+    async findAttendInfoLst() {
       this.loadTable = true;
-      let params = { ...this.staffListParams, ...this.filterParams };
-      let res = await staffApi.findPersonInfoLst(params);
+      let params = { ...this.checkListParams, ...this.filterParams };
+      let res = await checkApi.findAttendInfoLst(params);
       this.loadTable = false;
       if (res) {
         this.tableList = res.data.list;
@@ -96,23 +88,23 @@ export default {
     // 搜索、重置
     searchFilter(params) {
       this.filterParams = params;
-      this.findPersonInfoLst();
+      this.findAttendInfoLst();
     },
-    // 删除职员
+    // 删除职员考勤
     deleteStaff(id) {
-      this.$confirm("此操作将删除该职员, 是否继续?", "提示", {
+      this.$confirm("此操作将删除该职员工资信息, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(async () => {
-          let res = await staffApi.deletePersonInfo({ employeeID: id });
+          let res = await checkApi.deleteAttendInfo({ attendId: id });
           if (res) {
             this.$message({
               type: "success",
               message: "删除成功!"
             });
-            this.findPersonInfoLst();
+            this.findAttendInfoLst();
           }
         })
         .catch(() => {
@@ -128,11 +120,11 @@ export default {
     },
     changePage(val) {
       this.staffListParams.currentPage = val;
-      this.findPersonInfoLst();
+      this.findAttendInfoLst();
     },
     changeSize(val) {
       this.staffListParams.onePageCount = val;
-      this.findPersonInfoLst();
+      this.findAttendInfoLst();
     }
   }
 };

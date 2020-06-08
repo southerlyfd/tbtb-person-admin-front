@@ -1,7 +1,9 @@
 <template>
   <div class="staff-edit">
     <div class="top-btn">
-      <el-button @click="$router.push('list')" type="primary" size="small">返 回</el-button>
+      <el-button @click="$router.push('list')" type="primary" size="small"
+        >返 回</el-button
+      >
       <span>职员信息档案</span>
     </div>
     <el-form
@@ -16,12 +18,19 @@
         <div class="left">
           <div class="item">
             <el-form-item label="员工姓名" prop="name">
-              <el-input class="normal-input" v-model="staffFormParams.name"></el-input>
+              <el-input
+                class="normal-input"
+                v-model="staffFormParams.name"
+              ></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="sex">
-              <el-select class="normal-input" v-model="staffFormParams.sex" placeholder="请选择性别">
+              <el-select
+                class="normal-input"
+                v-model="staffFormParams.sex"
+                placeholder="请选择性别"
+              >
                 <el-option
-                  v-for="(item,ind) in sexList"
+                  v-for="(item, ind) in sexList"
                   :key="ind"
                   :label="item.label"
                   :value="item.value"
@@ -39,21 +48,36 @@
           </div>
           <div class="item">
             <el-form-item label="籍贯" prop="city">
-              <el-input class="normal-input" v-model="staffFormParams.city"></el-input>
+              <el-input
+                class="normal-input"
+                v-model="staffFormParams.city"
+              ></el-input>
             </el-form-item>
             <el-form-item label="民族" prop="nation">
-              <el-input class="normal-input" v-model="staffFormParams.nation"></el-input>
+              <el-input
+                class="normal-input"
+                v-model="staffFormParams.nation"
+              ></el-input>
             </el-form-item>
             <el-form-item label="政治面貌" prop="polity">
-              <el-input class="normal-input" v-model="staffFormParams.polity"></el-input>
+              <el-input
+                class="normal-input"
+                v-model="staffFormParams.polity"
+              ></el-input>
             </el-form-item>
           </div>
           <div class="item">
             <el-form-item label="文化程度" prop="culture">
-              <el-input class="normal-input" v-model="staffFormParams.culture"></el-input>
+              <el-input
+                class="normal-input"
+                v-model="staffFormParams.culture"
+              ></el-input>
             </el-form-item>
             <el-form-item label="婚姻状况" prop="marriage">
-              <el-input class="normal-input" v-model="staffFormParams.marriage"></el-input>
+              <el-input
+                class="normal-input"
+                v-model="staffFormParams.marriage"
+              ></el-input>
             </el-form-item>
           </div>
           <el-form-item label="毕业院校" prop="graduate">
@@ -72,13 +96,22 @@
       </div>
       <div class="form-item">
         <el-form-item label="工种" prop="wtype">
-          <el-input class="normal-input" v-model="staffFormParams.wtype"></el-input>
+          <el-input
+            class="normal-input"
+            v-model="staffFormParams.wtype"
+          ></el-input>
         </el-form-item>
         <el-form-item label="职务" prop="duty">
-          <el-input class="normal-input" v-model="staffFormParams.duty"></el-input>
+          <el-input
+            class="normal-input"
+            v-model="staffFormParams.duty"
+          ></el-input>
         </el-form-item>
         <el-form-item label="部门名称" prop="depart">
-          <el-input class="normal-input" v-model="staffFormParams.depart"></el-input>
+          <el-input
+            class="normal-input"
+            v-model="staffFormParams.depart"
+          ></el-input>
         </el-form-item>
         <el-form-item label="身份证号" prop="idcard">
           <el-input v-model="staffFormParams.idcard"></el-input>
@@ -86,13 +119,22 @@
       </div>
       <div class="form-item">
         <el-form-item label="手机" prop="mobile">
-          <el-input class="normal-input" v-model="staffFormParams.mobile"></el-input>
+          <el-input
+            class="normal-input"
+            v-model="staffFormParams.mobile"
+          ></el-input>
         </el-form-item>
         <el-form-item label="电子邮箱" prop="email">
-          <el-input class="normal-input" v-model="staffFormParams.email"></el-input>
+          <el-input
+            class="normal-input"
+            v-model="staffFormParams.email"
+          ></el-input>
         </el-form-item>
         <el-form-item label="住宅电话" prop="homePhone">
-          <el-input class="normal-input" v-model="staffFormParams.homePhone"></el-input>
+          <el-input
+            class="normal-input"
+            v-model="staffFormParams.homePhone"
+          ></el-input>
         </el-form-item>
         <el-form-item label="邮政编码" prop="postcode">
           <el-input v-model="staffFormParams.postcode"></el-input>
@@ -105,7 +147,9 @@
         <el-input v-model="staffFormParams.photo"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('staffForm')">保 存</el-button>
+        <el-button type="primary" @click="submitForm('staffForm')"
+          >保 存</el-button
+        >
         <el-button @click="resetForm('staffForm')">重 置</el-button>
       </el-form-item>
     </el-form>
@@ -143,7 +187,9 @@ export default {
         if (valid) {
           let res = false;
           let params = { ...this.staffFormParams };
-          params.date = params.date.getTime();
+          if (typeof params.date != "number") {
+            params.date = params.date.getTime();
+          }
           if (this.employeeID) {
             res = await staffApi.updatePersonInfo(params);
           } else {
